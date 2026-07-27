@@ -10,6 +10,7 @@ import { Card } from '@/components/Card';
 import { Button } from '@/components/Button';
 import { Toast } from '@/components/Feedback';
 import { H3, H4 } from '@/components/Typography';
+import { PAYONEER_PAYMENT_URL } from '@/constants';
 import { SimulationStatus } from './PaymentStatusBadge';
 import { 
   CreditCard, 
@@ -102,14 +103,18 @@ export function PaymentMethodCard({
 
           {/* CTA Action */}
           <div className="pt-2 flex justify-end">
-            <Button
+            <a
               id="btn-pay-card"
+              href={PAYONEER_PAYMENT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => {
                 onStatusChange('Paid');
                 onPay();
               }}
-              disabled={paymentLoading}
-              className="w-full sm:w-auto h-11 px-7 font-semibold flex items-center justify-center gap-2 cursor-pointer text-white bg-brand-blue hover:bg-brand-blue/90 transition-all duration-200 shadow-md hover:shadow-lg"
+              className={`w-full sm:w-auto h-11 px-7 font-semibold flex items-center justify-center gap-2 cursor-pointer text-white bg-brand-blue hover:bg-brand-blue/90 transition-all duration-200 shadow-md hover:shadow-lg rounded-button text-sm ${
+                paymentLoading ? 'pointer-events-none opacity-50' : ''
+              }`}
             >
               {paymentLoading ? (
                 <span className="inline-block h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -119,7 +124,7 @@ export function PaymentMethodCard({
                   <ArrowRight className="h-4.5 w-4.5" />
                 </>
               )}
-            </Button>
+            </a>
           </div>
         </div>
         {toast && (

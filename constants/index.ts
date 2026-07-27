@@ -83,3 +83,6 @@ export const INVESTMENT_CONFIG: FoundingPartnerProgramConfig = {
   ]
 };
 
+// Replace this URL whenever you create a new Payoneer payment request.
+export const PAYONEER_PAYMENT_URL = 'https://link.payoneer.com/Token?t=9655D58F786C4C0CA59330C011C463BC&src=pl';
+

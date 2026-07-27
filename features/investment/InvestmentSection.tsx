@@ -25,9 +25,27 @@ import {
   CheckCircle2,
   MessageSquare,
   Sparkles,
-  Info
+  Info,
+  PhoneCall,
+  Globe,
+  Bot,
+  Send,
+  TrendingUp,
+  BarChart3,
+  Target
 } from 'lucide-react';
 import { INVESTMENT_CONFIG } from '@/constants';
+
+const FOUNDING_PARTNER_INCLUDES = [
+  { title: "AI Receptionist", icon: PhoneCall },
+  { title: "Website Optimization", icon: Globe },
+  { title: "AI Customer Support Assistant", icon: Bot },
+  { title: "Monthly Error Monitoring & Technical Support", icon: ShieldCheck },
+  { title: "AI Follow-Up System (SMS & Email)", icon: Send },
+  { title: "Monthly AI Opportunity Analysis", icon: TrendingUp },
+  { title: "AI Performance Reporting", icon: BarChart3 },
+  { title: "One Monthly Strategy Call", icon: Calendar },
+];
 
 interface InvestmentSectionProps {
   onNext: () => void;
@@ -40,12 +58,10 @@ export function InvestmentSection({ onNext, onBack }: InvestmentSectionProps) {
   if (!proposal) return null;
 
   // Dynamic values extracted from proposal data
-  const clientName = proposal.agreementInformation?.clientName || proposal.client?.name || 'Client';
-  const companyName = proposal.agreementInformation?.companyName || proposal.client?.company || 'Company';
-  const selectedPackage = proposal.agreementInformation?.serviceType || 'Founding Partner Program';
+  const selectedPackage = 'Founding Partner Program';
   const monthlyInvestment = proposal.agreementInformation?.projectPrice || '$297/month';
   const paymentSchedule = proposal.agreementInformation?.paymentSchedule || '50% upfront, 50% upon deployment';
-  const implementationTimeline = proposal.agreementInformation?.timeline || '3-4 Weeks';
+  const implementationTimeline = 'Up to 2 weeks.';
 
   // Replace placeholder in terms with dynamic monthly investment value
   const formattedTerms = INVESTMENT_CONFIG.terms.map(t => 
@@ -111,7 +127,7 @@ export function InvestmentSection({ onNext, onBack }: InvestmentSectionProps) {
                   {selectedPackage}
                 </h3>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                  Tailored high-performance execution built exclusively for <span className="text-foreground font-medium">{clientName}</span> at <span className="text-foreground font-medium">{companyName}</span>.
+                  Tailored high-performance execution built exclusively for you.
                 </p>
               </div>
 
@@ -123,34 +139,63 @@ export function InvestmentSection({ onNext, onBack }: InvestmentSectionProps) {
               </div>
             </div>
 
-            {/* Program Details Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 pt-2">
-              <div className="space-y-6">
-                <div>
-                  <h4 className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest font-mono mb-2">Best For</h4>
-                  <p className="text-xs sm:text-sm text-muted-foreground/90 leading-relaxed font-sans font-normal">
-                    {INVESTMENT_CONFIG.bestFor}
-                  </p>
+            {/* Program Details: Best For & Outcome */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 pt-2">
+              <div className="rounded-xl border border-border/50 bg-background/50 dark:bg-card/40 p-5 sm:p-6 space-y-2.5 shadow-2xs">
+                <div className="flex items-center gap-2 text-brand-blue font-mono text-[10px] font-bold uppercase tracking-widest">
+                  <Target className="h-4 w-4 shrink-0" />
+                  <span>Best For</span>
                 </div>
-                
-                <div>
-                  <h4 className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest font-mono mb-2">Outcome</h4>
-                  <p className="text-xs sm:text-sm text-muted-foreground/90 leading-relaxed font-sans font-normal">
-                    {INVESTMENT_CONFIG.outcome}
-                  </p>
+                <p className="text-xs sm:text-sm text-foreground/90 leading-relaxed font-sans font-normal">
+                  Roofing companies that want exclusive early access to our AI growth systems at a locked-in Founding Partner rate before standard pricing takes effect.
+                </p>
+              </div>
+              
+              <div className="rounded-xl border border-border/50 bg-background/50 dark:bg-card/40 p-5 sm:p-6 space-y-2.5 shadow-2xs">
+                <div className="flex items-center gap-2 text-emerald-500 font-mono text-[10px] font-bold uppercase tracking-widest">
+                  <TrendingUp className="h-4 w-4 shrink-0" />
+                  <span>Outcome</span>
                 </div>
+                <p className="text-xs sm:text-sm text-foreground/90 leading-relaxed font-sans font-normal">
+                  Capture more leads, automate customer follow-up, and build a stronger customer acquisition system with ongoing AI support.
+                </p>
+              </div>
+            </div>
+
+            {/* Included Growth Systems & Support */}
+            <div className="space-y-4 pt-2">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-t border-border/10 pt-6">
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-brand-blue animate-pulse" />
+                  <h4 className="text-[11px] font-bold text-foreground uppercase tracking-widest font-mono">
+                    Included Growth Systems &amp; Support
+                  </h4>
+                </div>
+                <span className="text-[10px] font-mono font-medium text-muted-foreground bg-muted/40 px-3 py-1 rounded-full border border-border/40 w-fit">
+                  8 Enterprise Modules Included
+                </span>
               </div>
 
-              <div className="space-y-4">
-                <h4 className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest font-mono mb-3">Includes</h4>
-                <div className="grid grid-cols-1 gap-3">
-                  {INVESTMENT_CONFIG.includes.map((inc, i) => (
-                    <div key={i} className="flex items-start gap-2.5 text-xs sm:text-sm">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0 mt-0.5" />
-                      <span className="text-muted-foreground/90 leading-relaxed font-sans">{inc}</span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+                {FOUNDING_PARTNER_INCLUDES.map((item, idx) => (
+                  <div 
+                    key={idx} 
+                    className="group flex flex-col justify-between p-4 sm:p-5 rounded-xl border border-border/50 bg-background/40 dark:bg-card/30 hover:bg-card hover:border-brand-blue/40 hover:shadow-md transition-all duration-300 relative overflow-hidden"
+                  >
+                    <div className="space-y-3.5">
+                      <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-lg bg-brand-blue/10 text-brand-blue group-hover:bg-brand-blue group-hover:text-white flex items-center justify-center shrink-0 border border-brand-blue/15 transition-all duration-300 shadow-2xs">
+                        <item.icon className="h-4.5 w-4.5 sm:h-5 sm:w-5" />
+                      </div>
+                      <span className="text-xs sm:text-sm font-semibold text-foreground tracking-tight leading-snug block">
+                        {item.title}
+                      </span>
                     </div>
-                  ))}
-                </div>
+                    <div className="pt-3 mt-3 border-t border-border/20 flex items-center justify-between text-[10px] font-mono text-muted-foreground group-hover:text-brand-blue transition-colors">
+                      <span>Module 0{idx + 1}</span>
+                      <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 

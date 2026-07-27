@@ -14,7 +14,7 @@ export const MOCK_PROPOSAL: Proposal = {
     website: 'https://nafirofiqul.example.com',
     industry: 'Technology & E-commerce',
     serviceType: 'Client Portal Development',
-    projectPrice: '$25,000',
+    projectPrice: '$297',
     paymentSchedule: '50% Deposit, 50% on Completion',
     timeline: '5 Weeks',
     proposalId: 'PROP-2026-000007',
